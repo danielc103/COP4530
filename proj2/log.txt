@@ -1,0 +1,46 @@
+Daniel C Carroll
+ccarroll
+dcc12b
+
+Project 2 Log
+
+3.24.14(3hrs)
+read notes on iterators
+interesting stuff actually
+
+3.25.14(3hrs)
+continued reading notes
+read assignment
+
+3.26.14(2hrs)
+Started copying files over for project
+missing .x files from area51
+found files, named something differnt
+
+3.27.14(4.5hrs)
+Started finding all the implementations needed
+implimented and checked first round of builds
+they built....now onto testing
+
+3.28.14(4hrs)
+made the 100 test .cpps
+built all bst_adts and are running fine
+made sample files from ran generators
+they work!!
+fbst_adt and threaded done
+rbllt done!
+mbst can't build at all
+alot of errors
+
+3.29.12(4hrs)
+got response fron Dr. Lacher for mbst
+found problem, BST_ADT instead of just BST ohh that makes me angry
+built all mbst fine
+testing...
+testing.....
+Found problem with mbst_threaded.
+Appearntly not checking for dead nodes
+put while loop in to get on by the dead nodes...no mem leak or problems
+
+3.30.14(2.5hrs)
+finsishing and double checking and gonna turn in code

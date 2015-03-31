@@ -1,0 +1,84 @@
+Daniel C Carroll
+log.txt
+Project 1 
+
+1.31.14(2hrs)
+copied files
+read notes
+
+
+2.1.14(2)
+read files
+read discussion board
+
+
+2.2.14(2.5)
+psudo code started
+logic for intialize
+
+2.3.14(2)
+started coding intialize
+worked on psudo code
+
+
+2.4.14(2.5)
+found out parent set,get needed
+got logic and coded
+
+2.5.14(2)
+finsished intialize
+psudo for solve
+started solve
+
+2.6.14(2.5)
+hit brick in the wall
+solve logic fouled
+thought intialize was problem
+appearntly everyone did iterators while Lacher suggested bracket
+got confused
+
+
+2.7.14(1)
+friend just beat cancer, couldn't help me with intialize
+again worked on solve and intialize, seg faults
+
+2.8.14(8)
+spent all damn day second guessing myself
+classmates tons of help
+teaa.....nvm
+
+2.9.14(8)
+Got intialize the way its needs to be I think
+ID's good, walls good, start and goal good
+
+
+2.10.14(8)
+started back on solve
+seg fault
+don't know why
+nobody knows why, I think its my intialize, gonna email Lacher
+
+
+2.11.14(5)
+commented out everything and started over, nice to have an IDE
+found my damn soultion input pointed to NULL, seg faulted solved
+getting output now
+
+
+2.12.14(6)
+Can't get output correct, get first 3 and just stops
+try to go back to intialize neighborlist isn't getting everything
+All hope is gone, no inconsistant
+this is All I got 
+
+Enter maze file name (0 to quit): maze1
+** maze read successfully
+** maze is self-consistent
+** solution is: 0 6 12
+** maze graphic:
+ ** ShowMaze not implemented
+
+
+
+
+

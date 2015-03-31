@@ -1,0 +1,127 @@
+/*
+
+Daniel C Carroll
+ccarroll
+dcc12b
+
+wordbench2.cpp/implentation
+
+*/
+
+
+#include <wordbench2.h>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+
+bool WordBench::ReadText (const fsu::String& infile)
+{
+  std::ifstream ifs;
+
+  infiles_.PushBack(infile);
+  ifs.open(infile.Cstr());
+
+  if (ifs.fail())
+  {
+    std::cerr << "**Error can't open file " << infile << "**" << std::endl;
+    return 0;
+  }
+
+  fsu::String s;
+  unsigned long numwords = 0;
+
+  while (ifs >> s)
+  {       
+    size_t j = 0;
+    for (size_t i = 0; s.Size() > i; ++i)
+    {
+      if (isalnum(s[i]))
+      {
+        s[j] = s[i];
+        ++j;
+      }
+    } 
+
+   for (size_t i = 0; s.Size() > i; ++i)
+    {
+      s[i] = tolower(s[i]);
+    }
+    
+    if (s.Length() != 0)
+    {
+      ++frequency_[s];
+      ++numwords;
+      ++count_;
+    }
+  }
+
+
+  std::cout << "\nNumber of words read:        " << numwords << std::endl;
+  std::cout << "Current vocabulary size:      " << frequency_.Size() << std::endl;
+
+  ifs.close();
+  return 1;
+
+ }
+
+bool WordBench::WriteReport (const fsu::String& outfile, unsigned short c1, unsigned short c2) const
+{
+  std::ofstream ofs;
+  ofs.open(outfile.Cstr());
+
+  int d = 15;
+  int e = 15;
+
+  ofs << "Text Analysis for files: ";
+
+  fsu::ConstListIterator<fsu::String> ci;
+
+  for (ci = infiles_.Begin(); ci != infiles_.End(); ++ci)
+    ofs << (*ci) << " ";
+
+  ofs << "\n\n";
+  ofs << std::left << std::setw(c1) << "word" << std::right << std::setw(c2)
+      << "frequency" << std::endl;
+  ofs << std::left << std::setw(c1) << "----" << std::right << std::setw(c2)
+      << "---------" << std::endl;
+
+  frequency_.Display(ofs,d,e);
+
+  ofs << "\nNumber of words: " << count_ << std::endl;
+  ofs << "Vocabulary size: " << frequency_.Size() << std::endl;
+
+  ofs.close();
+
+  std::cout << "\nNumber of words: " << count_ << std::endl;
+  std::cout << "Vocabualry size: " << frequency_.Size() << std::endl;
+  std::cout << "Analysis written to file: " << outfile << std::endl;
+
+  return 1;
+}
+
+void WordBench::ShowSummary () const
+{
+  std::cout << "\nCurrent files:           ";
+
+  fsu::ConstListIterator<fsu::String> ci;
+  for (ci = infiles_.Begin(); ci != infiles_.End(); ++ci)
+    std::cout << (*ci) << " ";
+
+  std::cout << '\n';
+
+  std::cout << "Current word count:       " << count_ << std::endl;
+  std::cout << "Current vocabulary size:  " << frequency_.Size() << std::endl;
+}
+
+void WordBench::ClearData ()
+{
+  frequency_.Clear();
+  infiles_.Clear();
+  count_ = 0;
+}
+
+WordBench::WordBench () : count_(0) , frequency_(), infiles_()
+{}
+
+WordBench::~WordBench()
+{}

@@ -1,0 +1,141 @@
+Daniel Carroll
+Homework 1
+1/17/2014
+
+
+1.17(1.5hrs)
+downloaded files
+read assignment
+
+1.18(2hrs)
+started list.cpp
+read through list.cpp
+
+1.22(2hrs)
+drawed diagrams 
+sudo code for TBS's
+
+1.23(2hrs)
+writing reverse()
+commented out reverse() need to attack linkin/first
+
+1.24(3hrs)
+writing LinkIn
+writing LinkOut
+Got this error
+Have a nice day.
+*** glibc detected *** flist.x: double free or corruption (fasttop):
+0x0000000017d8a0d0 ***
+======= Backtrace: =========
+/lib64/libc.so.6[0x332247164f]
+/lib64/libc.so.6(cfree+0x4b)[0x332247587b]
+flist.x[0x408214]
+flist.x[0x40851e]
+flist.x[0x407e33]
+flist.x[0x40780e]
+/lib64/libc.so.6(__libc_start_main+0xf4)[0x332241d9c4]
+flist.x(__gxx_personality_v0+0x79)[0x401469]
+
+1.25(4hrs)
+error went away when I completed both link in/out
+found error came back on reverse()
+asked for some help
+found in while statement I wasn't inserting my temp into the list correctly
+fixed problem
+
+results for my name
+Enter [command][arguments] ('m' for menu, 'q' to quit): 11a
+  x1.PushFront(a)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 11D
+  x1.PushFront(D)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 12e
+  x1.PushBack(e)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1a
+  D = x1.Front()
+  i1 = x1.Begin()
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1++
+  ++i1;  a = *i1;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1++
+  ++i1;  e = *i1;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1ii
+  x1.Insert(i1,i)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 12l
+  x1.PushBack(l)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1a
+  D = x1.Front()
+  i1 = x1.Begin()
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1++
+  ++i1;  a = *i1;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1++
+  ++i1;  i = *i1;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 1in
+  x1.Insert(i1,n)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 12_
+  x1.PushBack(_)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 21a
+  x2.PushFront(a)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 21C
+  x2.PushFront(C)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 22l
+  x2.PushBack(l)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 22l
+  x2.PushBack(l)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2a
+  C = x2.Front()
+  i2 = x2.Begin()
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  a = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  l = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2io
+  x2.Insert(i2,o)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2a
+  C = x2.Front()
+  i2 = x2.Begin()
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  a = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  o = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2ir
+  x2.Insert(i2,r)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2a
+  C = x2.Front()
+  i2 = x2.Begin()
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  a = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2++
+  ++i2;  r = *i2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 2ir
+  x2.Insert(i2,r)
+Enter [command][arguments] ('m' for menu, 'q' to quit): 3=1
+x3 = x1; i3 = x3.Begin();
+Enter [command][arguments] ('m' for menu, 'q' to quit): 3+=2
+  x3 += x2;
+Enter [command][arguments] ('m' for menu, 'q' to quit): 3d
+List < char >  x3.Display(std::cout): Daniel_Carroll
+Enter [command][arguments] ('m' for menu, 'q' to quit): q
+
+Have a nice day.
+
+mlist.x went on FOREVER
+Testing List < String > type A2 at trial 1 x 1000000:
+  x0.Size() ==  0
+  x1.Size() ==  2
+  x2.Size() ==  6
+
+x0 cleared at size 1765
+
+x2 cleared at size 1776
+x0 cleared at size 1705
+
+Testing List < String > type A2 at trial 2 x 1000000:
+  x0.Size() ==  0
+  x1.Size() ==  0
+  x2.Size() ==  0
+
+all checked out
+
+1.26(1.5hrs)
+cleaned up code
+updated log
+turning in assignment

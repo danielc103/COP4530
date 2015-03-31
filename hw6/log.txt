@@ -1,0 +1,32 @@
+Daniel C Carroll
+COP4530
+Homework 6
+
+4.17.14(1.5hrs)
+By the way...it's palindrome week. Check the dates out!! 
+Read notes, reviewed video's 
+
+4.18.14(1.5hrs)
+copied files over to hw6 folder
+read thru headers and assignment 
+
+4.19.14(3hrs)
+implemented repair heap and build heap
+ran generic tests and compared to area51
+found both tests for my version alt:: and fsu:: have the same computer count
+need to make some changes to get better implementation
+
+4.20.14(3.5hrs)
+found I had heap repair implemented wrong
+did not have loc
+messed around with heap sort
+inserted in build in replace of the of push for loop
+made changes to pop, inserted in repair to take place, shorted that function
+put it all together.
+comp count for fsu:: is now less than alt and mataches the area51
+testing bitwise operators, yeilds slightly less counts
+
+4.21.14 (1.5hrs)
+double checked outputs
+runtime match 
+confirmed hsort works and sorts correctly

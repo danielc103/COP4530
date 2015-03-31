@@ -1,0 +1,388 @@
+/*
+    rbllt_adt.h
+
+*/
+
+#ifndef _RBLLT_H
+#define _RBLLT_H
+
+#include <bst_adt.h>
+#include <pair.h>   // needed for CheckRBLLT()
+#include <list.h>   // needed for CheckRBLLT()
+#include <stack.h>  // needed for CheckRBLLT()
+
+namespace fsu
+{
+  template < typename T, class P >
+  class RBLLT;
+
+  template < typename T, class P = LessThan<T> >
+  class RBLLT : public BST<T,P>
+  {
+  public:
+
+    typedef T    ValueType;
+    typedef P    PredicateType;
+
+    // This defines the iterators to be the those of the parent class
+    typedef typename BST<T,P>::InorderIterator    Iterator;
+    typedef typename BST<T,P>::LevelorderIterator LevelorderIterator;
+
+  public:
+             RBLLT  ();
+    explicit RBLLT  (P p);
+             RBLLT  (const RBLLT& b);
+    virtual  ~RBLLT ();
+    RBLLT& operator=(const RBLLT& b);
+
+    void Insert (const T& t)
+    {
+      this->root_ = RInsert(this->root_,t);
+      this->root_->SetBlack();
+    }
+
+    void Insert (Iterator i, const T& t)
+    {
+      if (t == *i)
+      {
+        BST<T,P>::Insert(i,t);
+        return;
+      }
+      RBLLT<T,P>::Insert(t);
+    }
+
+    void Put (const T& t)
+    {
+      Get(t) = t;
+    }
+
+    T& Get (const T& t)
+    {
+      Node * location;
+      this->root_ = RGet(this->root_,t,location);
+      this->root_->SetBlack();
+      return location -> value_;
+    }
+
+    void Rehash();
+
+  private: // definitions
+    typedef typename fsu::BST<T,P>::Node Node; 
+    typedef typename BST<T,P>::Flags     Flags;
+
+  private: // methods
+
+    Node* RGet    (Node* nptr, const T& tval, Node*& location);
+    Node* RInsert (Node* n, const T& t);
+
+    // rotations
+    static Node * RotateLeft  (Node * n);
+    static Node * RotateRight (Node * n);
+
+  }; // class RBLLT<>
+
+  // define equality in terms of Iterator type (which may vary)
+  template < typename T , class P > 
+  bool operator == (const RBLLT<T,P>& b1, const RBLLT<T,P>& b2)
+  {
+    if (&b1 == &b2) return 1;
+    typename BST<T,P>::Iterator i1 = b1.Begin(), i2 = b2.Begin();
+    while (i1!= b1.End() && i2 != b2.End())
+      if (*(i1++) != *(i2++))             // trees have different elements
+        return 0;
+    if (i1 != b1.End() || i2 != b2.End()) // trees are not the same size
+      return 0;
+    return 1;
+  }
+
+  template < typename T , class P > 
+  bool operator != (const RBLLT<T,P>& b1, const RBLLT<T,P>& b2)
+  {
+    return !(b1 == b2);
+  }
+
+  // proper type
+  
+  template < typename T , class P >
+  RBLLT<T,P>::RBLLT  () : BST<T,P>()
+  {}
+
+  template < typename T , class P >
+  RBLLT<T,P>::RBLLT  (P p) : BST<T,P>(p)
+  {}
+
+  template < typename T , class P >
+  RBLLT<T,P>::~RBLLT ()
+  {
+    this->Clear();
+  }
+
+  template < typename T , class P >
+  RBLLT<T,P>::RBLLT  ( const RBLLT& that ) : BST<T,P>(that)
+  {}
+
+  template < typename T , class P >
+  RBLLT<T,P>& RBLLT<T,P>::operator=( const RBLLT& that )
+  {
+    BST<T,P>::operator=(that);
+    return *this;
+  }
+
+  // rotations
+  template < typename T , class P >
+  typename RBLLT<T,P>::Node * RBLLT<T,P>::RotateLeft(Node * n)
+  {
+    if (0 == n || 0 == n->rchild_) return n;
+    Node * p = n->rchild_;
+    n->rchild_ = p->lchild_;
+    p->lchild_ = n;  
+    return p;
+  } // */
+
+  template < typename T , class P >
+  typename RBLLT<T,P>::Node * RBLLT<T,P>::RotateRight(Node * n)
+  {
+    if (n == 0 || n->lchild_ ==0)
+      return n;
+    Node * p = n->lchild_;
+    n->lchild_ = p->rchild_;
+    p->rchild_ = n;  
+    return p;
+  } // */
+
+  // recursive left-leaning insert
+  template < typename T , class P >
+  typename RBLLT<T,P>::Node * RBLLT<T,P>::RInsert(Node* nptr, const T& tval)
+  {
+    Node * n = this->root_;
+    std::cout << "RBLLT::Insert requires implementation!n";
+    return n;
+  } // RBLLT<T,P> :: RInsert()
+
+  // recursive left-leaning get
+  template < typename T , class P >
+  typename RBLLT<T,P>::Node * RBLLT<T,P>::RGet(Node* nptr, const T& tval, Node*& location)
+  {
+    // add new node at bottom of tree
+    if (nptr == 0)
+    {
+      location = BST<T,P>::NewNode(tval, BST<T,P>::RED);
+      return location;
+    }
+    // invariant 1: number of black nodes in root->null paths has not changed
+    
+    // split 4-nodes on the way down
+    if (nptr->lchild_ && nptr->lchild_->IsRed())
+      if (nptr->lchild_->lchild_ && nptr->lchild_->lchild_->IsRed())
+      {
+        nptr = RotateRight(nptr);
+        nptr->lchild_->SetBlack();
+      }
+    // invariant 2: number of black nodes in root->null paths has not changed
+
+    // insert recursively
+    if (this->pred_(tval,nptr->value_))
+    // left subtree
+    {
+      nptr->lchild_ = RGet(nptr->lchild_, tval, location);
+      // nptr->lchild_->parent_ = nptr;
+    }
+    else if (this->pred_(nptr->value_,tval))
+    // right subtree
+    {
+      nptr->rchild_ = RGet(nptr->rchild_, tval, location);
+      // nptr->rchild_->parent_ = nptr;
+    }
+    else
+    // equality: node exists - set location 
+    {
+      // nptr->value_ = tval;
+      nptr->SetAlive();
+      location = nptr;
+    }
+
+    // ensure left-leaning property on the way up
+    if (nptr->rchild_ && nptr->rchild_->IsRed()) // btcolormap::red_ == nptr->rchild_->flags_)
+    {
+      // left-rotate right-leaning red node 
+      nptr = RotateLeft(nptr);
+      // ensure that color of new parent is same as color of old parent
+      // and that new left child is red
+      if (nptr->lchild_->IsRed()) 
+        nptr->SetRed();
+      else
+      {
+        nptr->SetBlack();
+        nptr->lchild_->SetRed();
+      }
+    }
+    // invariant 3: number of black nodes in root->null paths has not changed
+    // This means the only place the black node count goes up is at the top: 
+    // if the node returned by RInsert is red, its color changes to black in Insert.
+
+    return nptr;
+  } // RBLLT<T,P> :: RGet()
+
+  template < typename T , class P >
+  void RBLLT<T,P>::Rehash()
+  // restructure with no tombstones
+  {
+    Node* newRoot = 0;
+    for (Iterator i = this->Begin(); i != this->End(); ++i)
+    {
+      newRoot = RInsert(newRoot,*i);
+      newRoot->SetBlack();
+    }
+    this->Clear();
+    this->root_ = newRoot;
+  }
+
+  template <typename T, class P>
+  bool BST_BASE<T,P>::CheckRBLLT (int verboseFlag) const
+  // 0 = no output, 1 = messages, 2 = messages & data
+  {
+    if (this->root_ == 0) return 1;
+
+    // first check for the BST, Property 0:
+    bool ok = this->CheckBST((bool)verboseFlag);
+    if (!ok) return ok;
+
+    // now check the red-black tree color properties 
+    Node * n = this->root_; // ConstNavigator n = Root();
+
+    // Check Property 2.  If the root isn't black, there is a violation.
+    ok = n->IsBlack(); // n.IsBlack();
+    if (!ok)
+    {
+      std::cout << "  ** RBLLT property failure:  root isn't black!\n";
+      return ok;
+    }
+
+    // This loop does a traversal checking the remaining properties.
+    // Pair < ConstNavigator, size_t >          bottomNode;
+    // List < Pair < ConstNavigator , size_t> > bottomNodeList;
+    Pair < Node* , size_t >          bottomNode;
+    List < Pair < Node* , size_t> >  bottomNodeList;
+    size_t blackCount = 0;
+    Node * nR, * nL, * nLL;
+    for (InorderIterator i = this->BeginInorder(); i != this->EndInorder(); ++i)
+    {
+      n = i.stk_.Top(); // i.GetNavigator();
+      // Check Property 3. No right child is red
+      {
+        if (n->HasRightChild())
+        {
+          nR  = n->rchild_; // ConstNavigator nR = n.GetRightChild();
+          if (nR->IsRed())
+          {
+            ok = 0;
+            std::cout << "  ** RBLLT Property 3 failure:  " << nR->value_ << " is a red right child"
+                      << " - TERMINATING TEST.\n";
+            return ok;
+          }
+        }
+      }
+      // Check Property 4. A red child of a red node cannot have a red (left) child.
+      if (n->HasLeftChild())
+      {
+        nL  = n->lchild_; // ConstNavigator nL = n.GetLeftChild();
+        if (nL->HasLeftChild())
+        {
+          nLL = nL->lchild_; // ConstNavigator nLL = nL.GetRightChild();
+          if (n->IsRed() && nL->IsRed() && nLL->IsRed())
+          {
+            ok = 0;
+            std::cout << "  ** RBLLT property 4 failure:  "
+                      << n->value_ << ", " << nL ->value_<< ", " << nLL->value_
+                      << " are contiguous red nodes in a descending path"
+                      << " - TERMINATING TEST.\n";
+            return ok;
+          }
+        }
+      }
+    
+      /*
+        Check Property 5.  If n is a node with <= 1 children, then n is at the
+        bottom of a "root-null" path. Count the number of black nodes from n to
+        root (including both n and root). Insert the pair <n, blackCount> into
+        a list for later analysis.
+
+                 D(b)      This is not red-black.
+                /   \      Paths through D have different black counts.
+               -    E(b)
+                    /  \
+                   -    -
+
+
+      */
+
+      if(!n->HasLeftChild() || !n->HasRightChild())
+      {
+        // n is at the bottom of a root-null path; set a pair's first_ to n
+        bottomNode.first_ = n;
+        blackCount = 0;
+        fsu::Stack < Node*, fsu::Vector<Node* > > rootnull = i.stk_;
+        do
+        {
+          n = rootnull.Top();
+          if (n->IsBlack()) ++blackCount;
+          rootnull.Pop();
+        }
+        while (!rootnull.Empty());
+        // set the pair's second_ to the number of black nodes.
+        bottomNode.second_ = blackCount;
+
+        // add this pair to the list
+        bottomNodeList.PushBack(bottomNode);
+      }
+    }
+ 
+    // if we get this far, properties 1-4 are verified
+    if (ok && (bool)verboseFlag)
+      std::cout << "  ** Color, Left-Leaning and Height-Limiting properties (1-4): OK\n"; 
+ 
+    // Now we have all of the bottom nodes saved, along with the black
+    // node count for the path. Verify that the black counts are the same:
+
+    typename List < Pair < Node* , size_t> > :: ConstIterator x,y;
+    for (x = bottomNodeList.Begin(), y = x++; x != bottomNodeList.End(); ++x)
+    {
+      // check number of black nodes for each path
+      if ((*y).second_ != (*x).second_)
+      {
+        ok = 0;
+        std::cout << "  ** RBLLT property failure:  black count isn't the same along"
+                  << " all paths from the root to a leaf!\n";
+        break;
+      }
+    }
+    if (verboseFlag == 2)
+    {
+      std::cout << "  =============================\n"
+                << "  Root - Null black node counts\n"
+                << "  =============================\n";
+      std::cout << std::setw(14) << "bottomNode" << std::setw(12) <<  "blackCount" << '\n';
+      std::cout << std::setw(14) << "----------" << std::setw(12) <<  "----------" << '\n';
+      for (x = bottomNodeList.Begin(); x != bottomNodeList.End(); ++x)
+      {
+        std::cout << std::setw(14) << ((*x).first_)->value_ 
+                  << std::setw(12) << (*x).second_ << '\n';
+      }
+      std::cout << "  =============================\n";
+    }
+    if (ok && (bool)verboseFlag)
+    {
+      x = bottomNodeList.Begin();
+      std::cout << "  ** Root-Null paths = " << bottomNodeList.Size()
+                << ",  black node counts = " << (*x).second_ << '\n'; 
+      std::cout << "  ** Constant Black Node Count Property 5: OK\n"; 
+    } 
+   if (ok && (bool)verboseFlag)
+      std::cout << "  ** CheckRBLLT: OK\n";
+    return ok;
+  } // CheckRBLLT()
+
+} // namespace fsu 
+
+#endif
+

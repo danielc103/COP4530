@@ -1,0 +1,140 @@
+/*
+    maze-dfs.starthere
+
+    <date here>
+    <your name here>
+    <your CS username here>
+  
+    <file header doc here>
+
+*/
+
+#include <fstream>
+#include <iomanip>
+#include <genalg.h>
+#include <maze.h>
+
+namespace maze
+{
+
+  //------------------------------
+  //   class Maze
+  //------------------------------
+
+  void Maze::Clear ()
+  {}
+
+  void Maze::Solve(fsu::List<unsigned long>& solution)
+  {}
+
+  bool Maze::Initialize (const char* filename)
+  {
+    return 1;
+  }
+
+  bool Maze::Consistent() const
+  {
+    return 1;
+  }
+
+  void Maze::ShowMaze(std::ostream& os) const
+  {
+    os << " ** ShowMaze not implemented\n";
+  }
+
+  // Maze:: implementations below are already done
+
+  Maze::Maze () : numrows_(0), numcols_(0), start_(0), goal_(0), cellVector_(0), conQueue_()
+  {}
+
+  Maze::~Maze ()
+  {
+    Clear();
+  }
+
+  //------------------------------
+  //   class Cell
+  //------------------------------
+
+  Cell& Cell::operator = (const Cell& c) // note: called by Vector::SetSize()
+  {
+    if (this != &c)
+    {
+      id_ = c.id_;
+      neighborList_ = c.neighborList_;
+      visited_ = c.visited_;
+      searchParent_ = c.searchParent_;
+    }
+    return *this;
+  }
+
+  void Cell::Clear()
+  {}
+
+  void Cell::AddNeighbor (Cell * N)
+  {
+    neighborList_.PushBack(N);
+  }
+
+  Cell* Cell::GetNextNeighbor () const
+  {
+    // sequentially search neighbor list for unvisited neighbor,
+    //   return address when found (early bailout)
+    // return 0 if not found
+    return 0;
+  } 
+
+  bool Cell::IsNeighbor (const Cell * N) const
+  {
+    // is N on my neighbor list? 
+    // sequentially search neighbor list,
+    //   return 1 if found (early bailout)
+    // return 0 if not found
+    return 0;
+  }
+
+  // Cell:: implementations below are already done
+
+  void Cell::SetID (unsigned long id)
+  {
+    id_ = id;
+  }
+
+  unsigned long Cell::GetID () const
+  {
+    return id_;
+  }
+
+  void Cell::SetVisited ()
+  {
+    visited_ = 1;
+  }
+
+  void Cell::UnSetVisited ()
+  {
+    visited_ = 0;
+  }
+
+  bool Cell::IsVisited () const
+  {
+    return visited_;
+  }
+
+  // default constructor, required to create vector of cells
+  Cell::Cell  () : id_(0), neighborList_(), visited_(0), searchParent_(0)
+  {}
+
+  // destructor - calls Cell::Clear()
+  Cell::~Cell ()
+  {
+    Clear();
+  }
+
+  // copy constructor - implemented, but sends message when called
+  // (we should not be using it)
+  Cell::Cell(const Cell& c) : id_(c.id_), neighborList_(c.neighborList_), visited_(c.visited_)
+  {
+    std::cout << "** ERROR: call to Cell copy constructor\n";
+  }
+
+} // namespace

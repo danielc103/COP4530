@@ -1,0 +1,32 @@
+Daniel C Carroll
+ccarroll
+dcc12b
+
+Homework 4 OAA Wordbench2
+
+moaa.x test run was stopped manually @ trial 6110 with memory set to 50000.
+
+foaa.x produced same results as provided by area51 with rantable produced
+table1.in.
+
+Success!
+
+3.12.14
+Read through assignment and blackboard
+
+3.13.14
+copied files over and read all of oaa.h and notes for BST
+
+3.14.14
+implemented missing functions in oaa.h
+
+3.15.14
+worked on wordbench2.h/cpp
+amazed at how much code is removed from hw3
+amazed at how much easier it is to keep track of data
+
+3.16.14
+finsihed all wordbench.h/cpp
+tested wb2.x against simple words, works great
+tested for memory leaks, post above
+tested foaa.x, post above

@@ -1,0 +1,55 @@
+Daniel C Carroll
+COP4530
+Homework 5
+
+Log File
+
+4.7.14(2hrs)
+read over notes..geez. This looks fun.
+
+
+4.8.14(2hrs)
+read more of notes 
+completed all of the files to be copied over
+created area51Test dir to keep testing seperate
+
+4.10.14(3.5hrs)
+started with insert
+concept of insert seems solid
+having trouble getting it ordered correctly, my two ifs work 
+found popfront was not the way to go, need to update data member directly
+cuts down on run time also, good move
+
+
+4.11.14(4hrs)
+++ operator started
+proves to be more difficult than insert
+pointers can get confusing with that many being manipulated
+having trouble getting past first on T test for fhblt.x
+
+4.12.14(2hrs)
+finsihed ++ operator.
+tested on multiple insert/Traversals
+satisfied
+Starting on sparse matrix times sparse vector multiplication
+
+4.13.14(5hrs)
+loop was taken off of startutil...thanks Lacher, that would have been mind
+numbing for a minute
+once loop acuired having access data to perform multiplication
+AHHHHHHH....Retrieve returns the value...thats what u and v are in the damn
+notes!!!!
+finished 
+
+
+//////Testing//////////
+Creating sparse matrix file
+converted to matrix
+could not square...do not have smxsm working
+created vecotr from rantable
+ran mxv to get result 
+then ran smxsv to get result
+ran diff and compared results
+ 
+
+

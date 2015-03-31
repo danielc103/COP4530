@@ -1,0 +1,40 @@
+Daniel C Carroll
+ccarroll
+dcc12b
+
+Homework 3
+wordbench
+
+2.26.14
+read assignment 
+read notes
+
+2.28.14
+started with header file
+fininshed header file
+
+3.1.14
+worked on readfile
+got clean done
+
+3.2.14
+worked on printing to file
+finsihed readfile
+
+3.3.14
+having seg faults on multiple files
+having trouble narrowing it down
+found it must be in readfile
+
+3.4.14
+finally narrowed down to inputing pair in wrong
+cleaned up readfile code
+got rid of seg faults!!!
+cleaned all my printing up
+
+3.5.14
+finally lowercased words
+pretty good clean on words
+done
+done 
+done
